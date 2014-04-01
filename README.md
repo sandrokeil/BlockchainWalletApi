@@ -1,5 +1,14 @@
 # Blockchain Wallet Api module for Zend Framework 2
 
+[![Build Status](https://travis-ci.org/sandrokeil/BlockchainWalletApi.png?branch=master)](https://travis-ci.org/sandrokeil/BlockchainWalletApi)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sandrokeil/BlockchainWalletApi/badges/quality-score.png?s=e0089b63bdd99801480a5c7aedbda372767990ab)](https://scrutinizer-ci.com/g/sandrokeil/BlockchainWalletApi/)
+[![Code Coverage](https://scrutinizer-ci.com/g/sandrokeil/BlockchainWalletApi/badges/coverage.png?s=0e88e7ce20f35ec45b5f68fdde49fbe745d07654)](https://scrutinizer-ci.com/g/sandrokeil/BlockchainWalletApi/)
+[![Latest Stable Version](https://poser.pugx.org/sandrokeil/blockchain-wallet-api/v/stable.png)](https://packagist.org/packages/sandrokeil/blockchain-wallet-api)
+[![Dependency Status](https://www.versioneye.com/user/projects/533b24ce7bae4bcd2e000089/badge.png)](https://www.versioneye.com/user/projects/533b24ce7bae4bcd2e000089)
+[![Total Downloads](https://poser.pugx.org/sandrokeil/blockchain-wallet-api/downloads.png)](https://packagist.org/packages/sandrokeil/blockchain-wallet-api)
+[![Zend Framework 2](http://img.shields.io/badge/zend%20framework-~2.2-blue.svg)](http://framework.zend.com/)
+[![Zend Framework 2](http://img.shields.io/badge/phpk-~5.3-blue.svg)](http://php.net/)
+
 This Zend Framework 2 module is a wrapper for the [blockchain wallet api](https://blockchain.info/en/api/blockchain_wallet_api). The usage is simple. Configure your request, call the service and access the response data via objects.
 
 ## Installation
@@ -15,13 +24,13 @@ Put the following into your composer.json
         }
     }
 
-Then add `Sake\BlockchainWalletApi` to your `config/application.config.php`. 
+Then add `Sake\BlockchainWalletApi` to your `config/application.config.php`.
 
 Copy `config/blockchainwalletapi.local.php.dist` to `config/blockchainwalletapi.local.php` and configure the credentials. **Never commit this file to public repositories!**
 
 ## Documentation
 
-Please refer to the [blockchain wallet api documentation]((https://blockchain.info/en/api/blockchain_wallet_api) for request details.
+Please refer to the [blockchain wallet api documentation](https://blockchain.info/en/api/blockchain_wallet_api) for request details.
 
 These request classes matches to api methods
 
