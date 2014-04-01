@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/sandrokeil/BlockchainWalletApi.png?branch=master)](https://travis-ci.org/sandrokeil/BlockchainWalletApi)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sandrokeil/BlockchainWalletApi/badges/quality-score.png?s=e0089b63bdd99801480a5c7aedbda372767990ab)](https://scrutinizer-ci.com/g/sandrokeil/BlockchainWalletApi/)
-[![Code Coverage](https://scrutinizer-ci.com/g/sandrokeil/BlockchainWalletApi/badges/coverage.png?s=0e88e7ce20f35ec45b5f68fdde49fbe745d07654)](https://scrutinizer-ci.com/g/sandrokeil/BlockchainWalletApi/)
+[![Coverage Status](https://coveralls.io/repos/sandrokeil/BlockchainWalletApi/badge.png)](https://coveralls.io/r/sandrokeil/BlockchainWalletApi)
 [![Latest Stable Version](https://poser.pugx.org/sandrokeil/blockchain-wallet-api/v/stable.png)](https://packagist.org/packages/sandrokeil/blockchain-wallet-api)
 [![Dependency Status](https://www.versioneye.com/user/projects/533b24ce7bae4bcd2e000089/badge.png)](https://www.versioneye.com/user/projects/533b24ce7bae4bcd2e000089)
 [![Total Downloads](https://poser.pugx.org/sandrokeil/blockchain-wallet-api/downloads.png)](https://packagist.org/packages/sandrokeil/blockchain-wallet-api)
