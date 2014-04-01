@@ -67,5 +67,4 @@ class NewAddress implements RequestInterface
     {
         return $this->label;
     }
-
 }

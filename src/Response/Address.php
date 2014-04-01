@@ -123,6 +123,4 @@ class Address
     {
         return $this->totalReceived;
     }
-
-
 }

@@ -6,8 +6,6 @@
 [![Latest Stable Version](https://poser.pugx.org/sandrokeil/blockchain-wallet-api/v/stable.png)](https://packagist.org/packages/sandrokeil/blockchain-wallet-api)
 [![Dependency Status](https://www.versioneye.com/user/projects/533b24ce7bae4bcd2e000089/badge.png)](https://www.versioneye.com/user/projects/533b24ce7bae4bcd2e000089)
 [![Total Downloads](https://poser.pugx.org/sandrokeil/blockchain-wallet-api/downloads.png)](https://packagist.org/packages/sandrokeil/blockchain-wallet-api)
-[![Zend Framework 2](http://img.shields.io/badge/zend%20framework-~2.2-blue.svg)](http://framework.zend.com/)
-[![Zend Framework 2](http://img.shields.io/badge/phpk-~5.3-blue.svg)](http://php.net/)
 
 This Zend Framework 2 module is a wrapper for the [blockchain wallet api](https://blockchain.info/en/api/blockchain_wallet_api). The usage is simple. Configure your request, call the service and access the response data via objects.
 

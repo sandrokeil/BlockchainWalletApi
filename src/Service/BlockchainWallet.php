@@ -149,6 +149,4 @@ class BlockchainWallet
     {
         return $this->options;
     }
-
-
 }

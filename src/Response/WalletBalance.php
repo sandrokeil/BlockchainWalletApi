@@ -42,6 +42,4 @@ class WalletBalance implements ResponseInterface
     {
         return $this->balance;
     }
-
-
 }

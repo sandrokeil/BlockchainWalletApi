@@ -219,6 +219,4 @@ class BlockchainWalletOptions extends AbstractOptions
     {
         $this->responsePluginManager = $responsePluginManager;
     }
-
-
 }
