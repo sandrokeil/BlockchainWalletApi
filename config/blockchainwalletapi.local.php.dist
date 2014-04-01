@@ -7,6 +7,7 @@
  * @license   http://github.com/sandrokeil/BlockchainWalletApi/blob/master/LICENSE.txt New BSD License
  */
 
+// copy this file to your application config folder
 return array(
     'sake_bwa' => array(
         'connection' => array(

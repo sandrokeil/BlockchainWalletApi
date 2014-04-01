@@ -24,7 +24,7 @@ Put the following into your composer.json
         }
     }
 
-Then add `Sake\BlockchainWalletApi` to your `config/application.config.php`.
+Then add `Sake\BlockchainWalletApi` to your `./config/application.config.php`.
 
 Copy `config/blockchainwalletapi.local.php.dist` to `config/blockchainwalletapi.local.php` and configure the credentials. **Never commit this file to public repositories!**
 
