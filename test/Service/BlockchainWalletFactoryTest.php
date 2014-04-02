@@ -11,13 +11,14 @@ namespace SakeTest\BlockchainWalletApi\Service;
 
 use Zend\Http;
 use Zend\Test\Util\ModuleLoader;
+use PHPUnit_Framework_TestCase as TestCase;
 
 /**
  * Class BlockChainWalletFactoryTest
  *
  * Tests integrity of \Sake\BlockchainWalletApi\Service\BlockchainWalletFactory
  */
-class BlockchainWalletFactoryTest extends \PHPUnit_Framework_TestCase
+class BlockchainWalletFactoryTest extends TestCase
 {
     /**
      * @var \Zend\ServiceManager\ServiceManager

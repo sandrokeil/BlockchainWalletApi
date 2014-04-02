@@ -61,7 +61,7 @@ class AddressBalance implements RequestInterface
      */
     public function setAddress($address)
     {
-        $this->address = $address;
+        $this->address = (string) $address;
     }
 
     /**

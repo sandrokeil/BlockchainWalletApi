@@ -34,12 +34,7 @@
         "zendframework/zend-serializer": "~2.2",
         "zendframework/zend-log": "~2.2",
         "zendframework/zend-modulemanager": "~2.2",
-        "phpunit/phpunit": "~3.7",
-        "phpunit/php-invoker": "~1.1",
-        "phpunit/phpunit-story": "~1.0",
-        "phpmd/phpmd": "~1.4",
-        "squizlabs/php_codesniffer": "~1.4",
-        "satooshi/php-coveralls": "~0.6"
+        "sandrokeil/citools": "~1.0"
     },
     "suggest": {
         "zendframework/zend-modulemanager": "Zend\\ModuleManager to use default module configuration e.g. services"
