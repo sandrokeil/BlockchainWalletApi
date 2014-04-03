@@ -7,7 +7,7 @@
 [![Dependency Status](https://www.versioneye.com/user/projects/533b24ce7bae4bcd2e000089/badge.png)](https://www.versioneye.com/user/projects/533b24ce7bae4bcd2e000089)
 [![Total Downloads](https://poser.pugx.org/sandrokeil/blockchain-wallet-api/downloads.png)](https://packagist.org/packages/sandrokeil/blockchain-wallet-api)
 
-This Zend Framework 2 module is a wrapper for the [blockchain wallet api](https://blockchain.info/en/api/blockchain_wallet_api). The usage is simple. Configure your request, call the service and access the response data via objects.
+Zend Framework 2 client library for blockchain wallet api. The usage is simple. Configure request, call the service and access the response data via objects.
 
 ## Installation
 
@@ -28,7 +28,7 @@ Copy `config/blockchainwalletapi.local.php.dist` to `config/blockchainwalletapi.
 
 ## Documentation
 
-Please refer to the [blockchain wallet api documentation](https://blockchain.info/en/api/blockchain_wallet_api) for request details.
+Please refer to [blockchain wallet api documentation](https://blockchain.info/en/api/blockchain_wallet_api) for request details.
 
 These request classes matches to api methods
 
@@ -37,7 +37,7 @@ These request classes matches to api methods
  * AddressBalance => address_balance
  * NewAddress => new_address
 
-Here is an example how to use if you want to get the wallet balance
+Here is an example how to retrieve wallet balance
 
 ```php
 <?php

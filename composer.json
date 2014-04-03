@@ -1,6 +1,6 @@
 {
     "name": "sandrokeil/blockchain-wallet-api",
-    "description": "This Zend Framework 2 module is a wrapper for the blockchain wallet api. Configure the request, call the service and access the response data via objects.",
+    "description": "Zend Framework 2 client library for blockchain wallet api. Configure request, call the service and access the response data via objects.",
     "homepage": "https://github.com/sandrokeil/BlockchainWalletApi",
     "license": "BSD-3-Clause",
     "type": "library",
