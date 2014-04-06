@@ -20,6 +20,19 @@ use Sake\BlockchainWalletApi\Request\ListAddresses;
 class ListAddressesTest extends TestCase
 {
     /**
+     * Tests if class implements request interface
+     *
+     * @group request
+     *
+     * @codeCoverageIgnore
+     */
+    public function testIsRequestClass()
+    {
+        $cut = new ListAddresses();
+        $this->assertInstanceOf('\Sake\BlockchainWalletApi\Request\RequestInterface', $cut);
+    }
+
+    /**
      * Tests if getMethod returns the correct api method
      *
      * @group request

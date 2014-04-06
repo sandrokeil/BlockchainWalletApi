@@ -34,7 +34,7 @@
         "zendframework/zend-serializer": "~2.2",
         "zendframework/zend-log": "~2.2",
         "zendframework/zend-modulemanager": "~2.2",
-        "sandrokeil/citools": "~1.0"
+        "sandrokeil/citools": "dev-master"
     },
     "suggest": {
         "zendframework/zend-modulemanager": "Zend\\ModuleManager to use default module configuration e.g. services"
