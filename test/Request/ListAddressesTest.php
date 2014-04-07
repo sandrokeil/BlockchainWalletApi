@@ -75,6 +75,8 @@ class ListAddressesTest extends TestCase
     {
         $cut = new ListAddresses();
 
+        $this->assertEquals(array(), $cut->getArguments());
+
         $confirmations = 4;
 
         $cut->setConfirmations($confirmations);

@@ -74,6 +74,8 @@ class AddressBalanceTest extends TestCase
      * @depends testIfRequestDataCanBeSet
      *
      * @covers \Sake\BlockchainWalletApi\Request\AddressBalance::getArguments
+     * @covers \Sake\BlockchainWalletApi\Request\AddressBalance::setAddress
+     * @covers \Sake\BlockchainWalletApi\Request\AddressBalance::setConfirmations
      */
     public function testGetArguments()
     {

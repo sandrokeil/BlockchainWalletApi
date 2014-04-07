@@ -55,5 +55,4 @@ class NewAddressTest extends TestCase
         $this->assertEquals($label, $cut->getLabel());
         $this->assertEquals($address, $cut->getAddress());
     }
-
 }
