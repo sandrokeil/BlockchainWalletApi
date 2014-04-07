@@ -114,19 +114,4 @@ class BlockchainWalletFactoryTest extends TestCase
 
         $stub->createService($this->serviceManager);
     }
-
-    /**
-     * Returns stub of test object
-     *
-     * @param array $methods Methods for test doubles
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    protected function getStubForTest(array $methods = null)
-    {
-        $stub = $this->getMock('\Sake\BlockchainWalletApi\Service\BlockchainWalletFactory', $methods);
-        $stub->expects($this->any())
-            ->method('getClient')
-            ->will($this->returnValue(new Http\Client(null, array('adapter' => new Http\Client\Adapter\Test()))));
-        return $stub;
-    }
 }
