@@ -1,0 +1,33 @@
+HTTP/1.1 200 OK
+Server: cloudflare-nginx
+Date: Mon, 07 Apr 2014 21:28:39 GMT
+Content-Type: application/json;charset=UTF-8
+Content-Length: 13
+Connection: close
+Set-Cookie: __cfduid=d905a0c533be39356d4628bf41eed79ed1396906119090; Expires=Mon, 23-Dec-2019 23:50:00 GMT; Domain=.blockchain.info; Path=/; HttpOnly
+Content-Language: de
+Content-Security-Policy: img-src 'self' data: https://blockchain.info; style-src 'self' 'unsafe-inline'; frame-src 'none'; script-src 'self'; connect-src 'self' *.blockchain.info wss://*.blockchain.info ws://*.blockchain.info; object-src 'none'; media-src 'none'; font-src 'none';
+Strict-Transport-Security: max-age=604800
+CF-RAY: 117950ec5dc100dd-AMS
+
+{
+    "addresses": [
+        {
+            "balance": 1400938800,
+            "address": "1Q1AtvCyKhtveGm3187mgNRh5YcukUWjQC",
+            "label": "SMS Deposits",
+            "total_received": 5954572400
+        },
+        {
+            "balance": 79434360,
+            "address": "1A8JiWcwvpY7tAopUkSnGuEYHmzGYfZPiq",
+            "label": "My Wallet",
+            "total_received": 453300048335
+        },
+        {
+            "balance": 0,
+            "address": "17p49XUC2fw4Fn53WjZqYAm4APKqhNPEkY",
+            "total_received": 0
+        }
+    ]
+}
