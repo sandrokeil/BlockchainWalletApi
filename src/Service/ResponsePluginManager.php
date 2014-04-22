@@ -31,6 +31,11 @@ class ResponsePluginManager extends AbstractPluginManager
         'balance'        => '\Sake\BlockchainWalletApi\Response\WalletBalance',
         'list'           => '\Sake\BlockchainWalletApi\Response\ListAddresses',
         'newaddress'     => '\Sake\BlockchainWalletApi\Response\NewAddress',
+        'payment'        => '\Sake\BlockchainWalletApi\Response\Send',
+        'sendmany'       => '\Sake\BlockchainWalletApi\Response\SendMany',
+        'archiveaddress' => '\Sake\BlockchainWalletApi\Response\AddressArchive',
+        'unarchiveaddress' => '\Sake\BlockchainWalletApi\Response\AddressUnarchive',
+        'autoconsolidate' => '\Sake\BlockchainWalletApi\Response\AutoConsolidateAddresses',
     );
 
     /**

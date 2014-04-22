@@ -20,7 +20,7 @@ use Sake\BlockchainWalletApi\Response\Address;
 class AddressTest extends TestCase
 {
     /**
-     * Tests if getMethod returns the correct api method
+     * Tests if data can be set/get
      *
      * @group response
      *

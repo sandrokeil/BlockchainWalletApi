@@ -32,12 +32,43 @@ Please refer to [blockchain wallet api documentation](https://blockchain.info/en
 
 These request classes matches to api methods
 
+ * Send => payment
+ * SendMany => sendmany
  * WalletBalance => balance
  * ListAddresses => list
  * AddressBalance => address_balance
  * NewAddress => new_address
+ * AddressArchive => archive_address
+ * AddressUnarchive => unarchive_address
+ * AutoConsolidateAddresses => auto_consolidate
 
-Here is an example how to retrieve wallet balance
+Here is an example how to send bitcoins to an bitcoin address:
+
+```php
+<?php
+
+use Sake\BlockchainWalletApi;
+
+// $sl is the service locator
+$blockchain = $sl->get('sake_bwa.service.default');
+
+$request = new BlockchainWalletApi\Request\Send();
+
+$request->setAmount(10000000); // in satoshi
+$request->setTo('1A8JiWcwvpY7tAopUkSnGuEYHmzGYfZPiq');
+
+
+try {
+	/* @var $response BlockchainWalletApi\Response\Send */
+	$response = $service->send($request);
+    // access to response data
+    $transactionHash = $response->getTxHash();
+} catch (BlockchainWalletApi\Exception\ExceptionInterface $exception) {
+    // error handling
+}
+```
+
+Here is an example how to retrieve wallet balance:
 
 ```php
 <?php
@@ -49,9 +80,14 @@ $blockchain = $sl->get('sake_bwa.service.default');
 
 $request = new BlockchainWalletApi\Request\WalletBalance();
 
-/* @var $response BlockchainWalletApi\Response\WalletBalance */
-$response = $blockchain->send($request);
-$balance = $response->getBalance(); // in satoshi
+try {
+	/* @var $response BlockchainWalletApi\Response\WalletBalance */
+	$response = $blockchain->send($request);
+    // access to response data
+    $balance = $response->getBalance(); // in satoshi
+} catch (BlockchainWalletApi\Exception\ExceptionInterface $exception) {
+    // error handling
+}
 ```
 
 ## Configuration
@@ -83,7 +119,6 @@ return array(
 
 ## Todo's
 
- * Implement missing blockchain wallet api methods
  * Data validation, especially requests
  * More unit tests
  * Satoshi converter/filter

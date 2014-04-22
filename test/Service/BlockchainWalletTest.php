@@ -40,6 +40,10 @@ class BlockchainWalletTest extends TestCase
         /* @var $response Response\AddressBalance */
         $response = $service->send($request);
 
+        $this->assertEquals(
+            trim(file_get_contents(__DIR__ . '/TestAsset/Request/address_balance.txt')),
+            trim($service->getClient()->getLastRawRequest())
+        );
         $this->assertEquals(0, $response->getBalance());
     }
 
@@ -111,6 +115,134 @@ class BlockchainWalletTest extends TestCase
     }
 
     /**
+     * Tests send() with send request
+     *
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::send
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::__construct
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::extractData
+     * @group service
+     */
+    public function testSendWithRequestSend()
+    {
+        $service = $this->getStubForTest(file_get_contents(__DIR__ . '/TestAsset/Response/send.txt'));
+
+        $request = new Request\Send();
+
+        $request->setAmount(10000000);
+        $request->setTo('1A8JiWcwvpY7tAopUkSnGuEYHmzGYfZPiq');
+
+        /* @var $response Response\Send */
+        $response = $service->send($request);
+
+        $this->assertEquals('Sent 0.1 BTC to 1A8JiWcwvpY7tAopUkSnGuEYHmzGYfZPiq', $response->getMessage());
+        $this->assertEquals(
+            'f322d01ad784e5deeb25464a5781c3b20971c1863679ca506e702e3e33c18e9c',
+            $response->getTxHash()
+        );
+        $this->assertEquals(
+            'Some funds are pending confirmation and cannot be spent yet (Value 0.001 BTC)',
+            $response->getNotice()
+        );
+    }
+
+    /**
+     * Tests send() with send many request
+     *
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::send
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::__construct
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::extractData
+     * @group service
+     */
+    public function testSendWithRequestSendMany()
+    {
+        $service = $this->getStubForTest(file_get_contents(__DIR__ . '/TestAsset/Response/send_many.txt'));
+
+        $recipients = array(
+            new Request\Recipient('regl4jtwe8flmf23knfsd', 10000),
+            new Request\Recipient('23dskflsfuo2u4ourjsd', 20000),
+            new Request\Recipient('34tfskdlfcvkdjhvkjwehf', 30000),
+        );
+
+        $request = new Request\SendMany();
+
+        $request->setRecipients($recipients);
+
+        /* @var $response Response\Send */
+        $response = $service->send($request);
+
+        $this->assertEquals('Sent To Multiple Recipients', $response->getMessage());
+        $this->assertEquals(
+            'f322d01ad784e5deeb25464a5781c3b20971c1863679ca506e702e3e33c18e9c',
+            $response->getTxHash()
+        );
+    }
+
+    /**
+     * Tests send() with archive address request
+     *
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::send
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::__construct
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::extractData
+     * @group service
+     */
+    public function testSendWithRequestAddressArchive()
+    {
+        $service = $this->getStubForTest(file_get_contents(__DIR__ . '/TestAsset/Response/address_archive.txt'));
+
+        $request = new Request\AddressArchive();
+
+        /* @var $response Response\AddressArchive */
+        $response = $service->send($request);
+
+        $this->assertEquals('18fyqiZzndTxdVo7g9ouRogB4uFj86JJiy', $response->getArchived());
+    }
+
+    /**
+     * Tests send() with unarchive address request
+     *
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::send
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::__construct
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::extractData
+     * @group service
+     */
+    public function testSendWithRequestAddressUnarchive()
+    {
+        $service = $this->getStubForTest(file_get_contents(__DIR__ . '/TestAsset/Response/address_unarchive.txt'));
+
+        $request = new Request\AddressUnarchive();
+
+        /* @var $response Response\AddressUnarchive */
+        $response = $service->send($request);
+
+        $this->assertEquals('18fyqiZzndTxdVo7g9ouRogB4uFj86JJiy', $response->getActive());
+    }
+
+    /**
+     * Tests send() with auto consolidate addresses request
+     *
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::send
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::__construct
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::extractData
+     * @group service
+     */
+    public function testSendWithRequestAutoConsolidateAddresses()
+    {
+        $service = $this->getStubForTest(
+            file_get_contents(__DIR__ . '/TestAsset/Response/auto_consolidate_addresses.txt')
+        );
+
+        $request = new Request\AutoConsolidateAddresses();
+        $request->setDays(10);
+
+        /* @var $response Response\AutoConsolidateAddresses */
+        $response = $service->send($request);
+
+        $consolidated = array('18fyqiZzndTxdVo7g9ouRogB4uFj86JJiy', '1Q1AtvCyKhtveGm3187mgNRh5YcukUWjQC');
+
+        $this->assertEquals($consolidated, $response->getConsolidated());
+    }
+
+    /**
      * Returns stub of test object
      *
      * @param string $response Http response
@@ -124,7 +256,14 @@ class BlockchainWalletTest extends TestCase
             $methods,
             array(
                 new Http\Client(null, array('adapter' => new Http\Client\Adapter\Test())),
-                new BlockchainWalletOptions()
+                new BlockchainWalletOptions(
+                    array(
+                        'url' => 'https://blockchain.info/de/merchant/',
+                        'guid' => 'test43',
+                        'main_password' => 'mainpwd',
+                        'second_password' => 'secpwd',
+                    )
+                )
             )
         );
         $stub->getClient()->getAdapter()->setResponse($response);

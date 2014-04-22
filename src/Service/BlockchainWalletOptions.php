@@ -9,7 +9,7 @@
 
 namespace Sake\BlockchainWalletApi\Service;
 
-use Sake\BlockchainWalletApi\Hydrator\AddressStrategy;
+use Sake\BlockchainWalletApi\Hydrator;
 use Zend\Http\Request;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\AbstractOptions;
@@ -183,8 +183,8 @@ class BlockchainWalletOptions extends AbstractOptions
     }
 
     /**
-     * Returns hydrator for hydration of result data to responses. Lazy-loads a default hydrator instance if none
-     * registered
+     * Returns hydrator for hydration of result data to responses. Lazy-loads a default hydrator instance with
+     * strategies if none registered
      *
      * @return \Zend\Stdlib\Hydrator\HydrationInterface
      */
@@ -192,13 +192,14 @@ class BlockchainWalletOptions extends AbstractOptions
     {
         if (null === $this->hydrator) {
             $this->hydrator = new ClassMethods();
-            $this->hydrator->addStrategy('addresses', new AddressStrategy());
+            $this->hydrator->addStrategy('addresses', new Hydrator\AddressStrategy());
+            $this->hydrator->addStrategy('consolidated', new Hydrator\AddressListStrategy());
         }
         return $this->hydrator;
     }
 
     /**
-     * Returns response plugin manager. Lazy-loads a default hydrator instance if none registered
+     * Returns response plugin manager. Lazy-loads a default response manager instance if none registered
      *
      * @return ServiceLocatorInterface
      */
