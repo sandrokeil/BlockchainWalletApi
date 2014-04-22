@@ -1,0 +1,5 @@
+GET /de/merchant/test43/balance?password=mainpwd&second_password=secpwd HTTP/1.1
+Host: blockchain.info
+Connection: close
+Accept-Encoding: gzip, deflate
+User-Agent: Zend\Http\Client

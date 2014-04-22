@@ -64,6 +64,12 @@ class BlockchainWalletTest extends TestCase
         /* @var $response Response\WalletBalance */
         $response = $service->send($request);
 
+        $this->assertEquals(
+            trim(file_get_contents(__DIR__ . '/TestAsset/Request/wallet_balance.txt')),
+            trim($service->getClient()->getLastRawRequest())
+        );
+
+
         $this->assertEquals(0, $response->getBalance());
     }
 
