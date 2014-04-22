@@ -6,6 +6,7 @@
 [![Latest Stable Version](https://poser.pugx.org/sandrokeil/blockchain-wallet-api/v/stable.png)](https://packagist.org/packages/sandrokeil/blockchain-wallet-api)
 [![Dependency Status](https://www.versioneye.com/user/projects/533b24ce7bae4bcd2e000089/badge.png)](https://www.versioneye.com/user/projects/533b24ce7bae4bcd2e000089)
 [![Total Downloads](https://poser.pugx.org/sandrokeil/blockchain-wallet-api/downloads.png)](https://packagist.org/packages/sandrokeil/blockchain-wallet-api)
+[![License](https://poser.pugx.org/sandrokeil/blockchain-wallet-api/license.png)](https://packagist.org/packages/sandrokeil/blockchain-wallet-api)
 
 Zend Framework 2 client library for blockchain wallet api. The usage is simple. Configure request, call the service and access the response data via objects.
 
