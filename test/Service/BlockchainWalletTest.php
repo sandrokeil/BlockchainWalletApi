@@ -41,7 +41,8 @@ class BlockchainWalletTest extends TestCase
         $response = $service->send($request);
 
         $expected = trim(file_get_contents(__DIR__ . '/TestAsset/Request/address_balance.txt'));
-        $actual = trim($service->getClient()->getLastRawRequest());
+        // workaround for crlf line endings
+        $actual = preg_replace('~\R~u', "\n", trim($service->getClient()->getLastRawRequest()));
 
         $this->assertEquals(
             $expected,
@@ -69,7 +70,8 @@ class BlockchainWalletTest extends TestCase
         $response = $service->send($request);
 
         $expected = trim(file_get_contents(__DIR__ . '/TestAsset/Request/wallet_balance.txt'));
-        $actual = trim($service->getClient()->getLastRawRequest());
+        // workaround for crlf line endings
+        $actual = preg_replace('~\R~u', "\n", trim($service->getClient()->getLastRawRequest()));
 
         $this->assertEquals(
             $expected,
