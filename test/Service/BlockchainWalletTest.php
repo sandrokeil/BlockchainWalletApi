@@ -40,9 +40,13 @@ class BlockchainWalletTest extends TestCase
         /* @var $response Response\AddressBalance */
         $response = $service->send($request);
 
+        $expected = trim(file_get_contents(__DIR__ . '/TestAsset/Request/address_balance.txt'));
+        $actual = trim($service->getClient()->getLastRawRequest());
+
         $this->assertEquals(
-            trim(file_get_contents(__DIR__ . '/TestAsset/Request/address_balance.txt')),
-            trim($service->getClient()->getLastRawRequest())
+            $expected,
+            $actual,
+            $expected . PHP_EOL . ' does not match ' . PHP_EOL . $actual
         );
         $this->assertEquals(0, $response->getBalance());
     }
@@ -64,11 +68,14 @@ class BlockchainWalletTest extends TestCase
         /* @var $response Response\WalletBalance */
         $response = $service->send($request);
 
-        $this->assertEquals(
-            trim(file_get_contents(__DIR__ . '/TestAsset/Request/wallet_balance.txt')),
-            trim($service->getClient()->getLastRawRequest())
-        );
+        $expected = trim(file_get_contents(__DIR__ . '/TestAsset/Request/wallet_balance.txt'));
+        $actual = trim($service->getClient()->getLastRawRequest());
 
+        $this->assertEquals(
+            $expected,
+            $actual,
+            $expected . PHP_EOL . ' does not match ' . PHP_EOL . $actual
+        );
 
         $this->assertEquals(0, $response->getBalance());
     }

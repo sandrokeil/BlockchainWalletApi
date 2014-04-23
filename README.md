@@ -115,7 +115,7 @@ return array(
 );
 ```
 
-## Registered Service names
+## Registered service names
  * `sake_bwa.service.default`: a \Sake\BlockchainWalletApi\Service\BlockchainWallet instance to send requests to the api
 
 ## Todo's
