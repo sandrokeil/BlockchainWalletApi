@@ -1,0 +1,5 @@
+GET /de/merchant/test43/archive_address?password=mainpwd&second_password=secpwd&address=18fyqiZzndTxdVo7g9ouRogB4uFj86JJiy HTTP/1.1
+Host: blockchain.info
+Connection: close
+Accept-Encoding: gzip, deflate
+User-Agent: Zend\Http\Client

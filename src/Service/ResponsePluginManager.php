@@ -48,8 +48,7 @@ class ResponsePluginManager extends AbstractPluginManager
     /**
      * Validate the plugin
      *
-     * Checks that the filter loaded is either a valid callback or an instance
-     * of FilterInterface.
+     * Checks that the response loaded is either a valid callback or an instance of ResponseInterface.
      *
      * @param  mixed $plugin
      * @return void

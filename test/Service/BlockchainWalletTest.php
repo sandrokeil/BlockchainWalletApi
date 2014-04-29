@@ -11,6 +11,7 @@ namespace SakeTest\BlockchainWalletApi\Service;
 
 use Sake\BlockchainWalletApi\Request;
 use Sake\BlockchainWalletApi\Response;
+use Sake\BlockchainWalletApi\Service\BlockchainWallet;
 use Sake\BlockchainWalletApi\Service\BlockchainWalletOptions;
 use Zend\Http;
 use PHPUnit_Framework_TestCase as TestCase;
@@ -40,16 +41,13 @@ class BlockchainWalletTest extends TestCase
         /* @var $response Response\AddressBalance */
         $response = $service->send($request);
 
-        $expected = trim(file_get_contents(__DIR__ . '/TestAsset/Request/address_balance.txt'));
-        // workaround for crlf line endings
-        $actual = preg_replace('~\R~u', "\n", trim($service->getClient()->getLastRawRequest()));
+        $this->assertEquals(0, $response->getBalance());
 
         $this->assertEquals(
-            $expected,
-            $actual,
-            $expected . PHP_EOL . ' does not match ' . PHP_EOL . $actual
+            $this->getLastRawRequestExpected(__DIR__ . '/TestAsset/Request/address_balance.txt'),
+            $this->getLastRawRequest($service),
+            'Requests does not match'
         );
-        $this->assertEquals(0, $response->getBalance());
     }
 
     /**
@@ -69,17 +67,13 @@ class BlockchainWalletTest extends TestCase
         /* @var $response Response\WalletBalance */
         $response = $service->send($request);
 
-        $expected = trim(file_get_contents(__DIR__ . '/TestAsset/Request/wallet_balance.txt'));
-        // workaround for crlf line endings
-        $actual = preg_replace('~\R~u', "\n", trim($service->getClient()->getLastRawRequest()));
+        $this->assertEquals(0, $response->getBalance());
 
         $this->assertEquals(
-            $expected,
-            $actual,
-            $expected . PHP_EOL . ' does not match ' . PHP_EOL . $actual
+            $this->getLastRawRequestExpected(__DIR__ . '/TestAsset/Request/wallet_balance.txt'),
+            $this->getLastRawRequest($service),
+            'Requests does not match'
         );
-
-        $this->assertEquals(0, $response->getBalance());
     }
 
     /**
@@ -93,14 +87,23 @@ class BlockchainWalletTest extends TestCase
     public function testSendWithRequestNewAddress()
     {
         $service = $this->getStubForTest(file_get_contents(__DIR__ . '/TestAsset/Response/new_address.txt'));
+        $label = 'Order No : 1234';
 
         $request = new Request\NewAddress();
+
+        $request->setLabel($label);
 
         /* @var $response Response\NewAddress */
         $response = $service->send($request);
 
-        $this->assertEquals('Order No : 1234', $response->getLabel());
+        $this->assertEquals($label, $response->getLabel());
         $this->assertEquals('18fyqiZzndTxdVo7g9ouRogB4uFj86JJiy', $response->getAddress());
+
+        $this->assertEquals(
+            $this->getLastRawRequestExpected(__DIR__ . '/TestAsset/Request/new_address.txt'),
+            $this->getLastRawRequest($service),
+            'Requests does not match'
+        );
     }
 
     /**
@@ -127,6 +130,12 @@ class BlockchainWalletTest extends TestCase
         $this->assertArrayHasKey('1A8JiWcwvpY7tAopUkSnGuEYHmzGYfZPiq', $addresses);
         $this->assertArrayHasKey('17p49XUC2fw4Fn53WjZqYAm4APKqhNPEkY', $addresses);
         $this->assertInstanceOf('\Sake\BlockchainWalletApi\Response\Address', current($addresses));
+
+        $this->assertEquals(
+            $this->getLastRawRequestExpected(__DIR__ . '/TestAsset/Request/list_addresses.txt'),
+            $this->getLastRawRequest($service),
+            'Requests does not match'
+        );
     }
 
     /**
@@ -157,6 +166,12 @@ class BlockchainWalletTest extends TestCase
         $this->assertEquals(
             'Some funds are pending confirmation and cannot be spent yet (Value 0.001 BTC)',
             $response->getNotice()
+        );
+
+        $this->assertEquals(
+            $this->getLastRawRequestExpected(__DIR__ . '/TestAsset/Request/send.txt'),
+            $this->getLastRawRequest($service),
+            'Requests does not match'
         );
     }
 
@@ -190,6 +205,12 @@ class BlockchainWalletTest extends TestCase
             'f322d01ad784e5deeb25464a5781c3b20971c1863679ca506e702e3e33c18e9c',
             $response->getTxHash()
         );
+
+        $this->assertEquals(
+            $this->getLastRawRequestExpected(__DIR__ . '/TestAsset/Request/send_many.txt'),
+            $this->getLastRawRequest($service),
+            'Requests does not match'
+        );
     }
 
     /**
@@ -203,13 +224,21 @@ class BlockchainWalletTest extends TestCase
     public function testSendWithRequestAddressArchive()
     {
         $service = $this->getStubForTest(file_get_contents(__DIR__ . '/TestAsset/Response/address_archive.txt'));
+        $address = '18fyqiZzndTxdVo7g9ouRogB4uFj86JJiy';
 
         $request = new Request\AddressArchive();
+        $request->setAddress($address);
 
         /* @var $response Response\AddressArchive */
         $response = $service->send($request);
 
-        $this->assertEquals('18fyqiZzndTxdVo7g9ouRogB4uFj86JJiy', $response->getArchived());
+        $this->assertEquals($address, $response->getArchived());
+
+        $this->assertEquals(
+            $this->getLastRawRequestExpected(__DIR__ . '/TestAsset/Request/address_archive.txt'),
+            $this->getLastRawRequest($service),
+            'Requests does not match'
+        );
     }
 
     /**
@@ -223,13 +252,21 @@ class BlockchainWalletTest extends TestCase
     public function testSendWithRequestAddressUnarchive()
     {
         $service = $this->getStubForTest(file_get_contents(__DIR__ . '/TestAsset/Response/address_unarchive.txt'));
+        $address = '18fyqiZzndTxdVo7g9ouRogB4uFj86JJiy';
 
         $request = new Request\AddressUnarchive();
+        $request->setAddress($address);
 
         /* @var $response Response\AddressUnarchive */
         $response = $service->send($request);
 
         $this->assertEquals('18fyqiZzndTxdVo7g9ouRogB4uFj86JJiy', $response->getActive());
+
+        $this->assertEquals(
+            $this->getLastRawRequestExpected(__DIR__ . '/TestAsset/Request/address_unarchive.txt'),
+            $this->getLastRawRequest($service),
+            'Requests does not match'
+        );
     }
 
     /**
@@ -255,6 +292,12 @@ class BlockchainWalletTest extends TestCase
         $consolidated = array('18fyqiZzndTxdVo7g9ouRogB4uFj86JJiy', '1Q1AtvCyKhtveGm3187mgNRh5YcukUWjQC');
 
         $this->assertEquals($consolidated, $response->getConsolidated());
+
+        $this->assertEquals(
+            $this->getLastRawRequestExpected(__DIR__ . '/TestAsset/Request/auto_consolidate_addresses.txt'),
+            $this->getLastRawRequest($service),
+            'Requests does not match'
+        );
     }
 
     /**
@@ -283,5 +326,28 @@ class BlockchainWalletTest extends TestCase
         );
         $stub->getClient()->getAdapter()->setResponse($response);
         return $stub;
+    }
+
+    /**
+     * Returns last raw request from client
+     *
+     * @param BlockchainWallet $service
+     * @return string Raw request
+     */
+    protected function getLastRawRequest(BlockchainWallet $service)
+    {
+        // workaround for crlf line endings
+        return preg_replace('~\R~u', "\n", trim($service->getClient()->getLastRawRequest()));
+    }
+
+    /**
+     * Returns last raw request from client
+     *
+     * @param string $file File for content
+     * @return string Expected request
+     */
+    protected function getLastRawRequestExpected($file)
+    {
+        return trim(file_get_contents($file));
     }
 }

@@ -26,7 +26,7 @@ class AutoConsolidateAddresses implements ResponseInterface
     /**
      * Sets archived address
      *
-     * @param array $addresses
+     * @param array $addresses List of bitcoin addresses
      */
     public function setConsolidated(array $addresses)
     {
@@ -36,7 +36,7 @@ class AutoConsolidateAddresses implements ResponseInterface
     /**
      * Returns archived address
      *
-     * @return array
+     * @return array List of bitcoin addresses
      */
     public function getConsolidated()
     {

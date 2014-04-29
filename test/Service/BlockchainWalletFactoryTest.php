@@ -48,7 +48,7 @@ class BlockchainWalletFactoryTest extends TestCase
     }
 
     /**
-     * Tests getServiceConfig() should should return service manager configuration
+     * Tests createService() returns a valid and configured service instance.
      *
      * @covers \Sake\BlockchainWalletApi\Service\BlockchainWalletFactory::createService
      * @covers \Sake\BlockchainWalletApi\Service\BlockchainWalletFactory::__construct
@@ -87,7 +87,7 @@ class BlockchainWalletFactoryTest extends TestCase
     }
 
     /**
-     * Tests getServiceConfig() should should return service manager configuration
+     * Tests createService() throws runtime exception if no options are provided
      *
      * @covers \Sake\BlockchainWalletApi\Service\BlockchainWalletFactory::createService
      * @covers \Sake\BlockchainWalletApi\Service\BlockchainWalletFactory::getModule

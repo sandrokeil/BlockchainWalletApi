@@ -1,0 +1,5 @@
+GET /de/merchant/test43/sendmany?password=mainpwd&second_password=secpwd&recipients=%7B%22regl4jtwe8flmf23knfsd%22%3A10000%2C%2223dskflsfuo2u4ourjsd%22%3A20000%2C%2234tfskdlfcvkdjhvkjwehf%22%3A30000%7D HTTP/1.1
+Host: blockchain.info
+Connection: close
+Accept-Encoding: gzip, deflate
+User-Agent: Zend\Http\Client
