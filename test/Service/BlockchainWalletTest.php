@@ -15,6 +15,7 @@ use Sake\BlockchainWalletApi\Service\BlockchainWallet;
 use Sake\BlockchainWalletApi\Service\BlockchainWalletOptions;
 use Zend\Http;
 use PHPUnit_Framework_TestCase as TestCase;
+use Zend\Http\Response as HttpResponse;
 
 /**
  * Class BlockChainWalletTest
@@ -301,13 +302,110 @@ class BlockchainWalletTest extends TestCase
     }
 
     /**
+     * Test if getUri() returns correct blockchain wallet api uri
+     *
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::getUri
+     * @dataProvider dataProviderForTestGetUri
+     * @group service
+     *
+     * @param Request\RequestInterface $request
+     * @param string $expected Expected uri
+     */
+    public function testGetUri(Request\RequestInterface $request, $expected)
+    {
+        $class = new \ReflectionClass('\Sake\BlockchainWalletApi\Service\BlockchainWallet');
+        $method = $class->getMethod('getUri');
+        $method->setAccessible(true);
+
+        $this->assertEquals($expected, $method->invoke($this->getStubForTest(), $request));
+    }
+
+    /**
+     * Test if getArguments() returns api arguments
+     *
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::getArguments
+     * @group service
+     */
+    public function testGetArguments()
+    {
+        $class = new \ReflectionClass('\Sake\BlockchainWalletApi\Service\BlockchainWallet');
+        $method = $class->getMethod('getArguments');
+        $method->setAccessible(true);
+
+        $expected = array(
+            'password' => 'mainpwd',
+            'second_password' => 'secpwd',
+        );
+
+        $this->assertEquals($expected, $method->invoke($this->getStubForTest(), new Request\WalletBalance()));
+    }
+
+    /**
+     * Test if getUri() returns correct blockchain wallet api uri
+     *
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::extractData
+     * @group service
+     */
+    public function testExtractDataShouldThrowExceptionIfRequestFailed()
+    {
+        $class = new \ReflectionClass('\Sake\BlockchainWalletApi\Service\BlockchainWallet');
+        $method = $class->getMethod('extractData');
+        $method->setAccessible(true);
+
+        $response = new HttpResponse();
+        $response->setStatusCode(HttpResponse::STATUS_CODE_404);
+
+        $this->setExpectedException('\Sake\BlockchainWalletApi\Exception\RuntimeException', 'Server responded');
+        $method->invoke($this->getStubForTest(), $response, new Response\WalletBalance());
+    }
+
+    /**
+     * Test if getUri() returns correct blockchain wallet api uri
+     *
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::extractData
+     * @group service
+     */
+    public function testExtractDataShouldThrowExceptionResponseIsEmpty()
+    {
+        $class = new \ReflectionClass('\Sake\BlockchainWalletApi\Service\BlockchainWallet');
+        $method = $class->getMethod('extractData');
+        $method->setAccessible(true);
+
+        $response = new HttpResponse();
+        $response->setStatusCode(HttpResponse::STATUS_CODE_200);
+
+        $this->setExpectedException('\Sake\BlockchainWalletApi\Exception\RuntimeException', 'Received no data');
+        $method->invoke($this->getStubForTest(), $response, new Response\WalletBalance());
+    }
+
+    /**
+     * Test if getUri() returns correct blockchain wallet api uri
+     *
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::extractData
+     * @group service
+     */
+    public function testExtractDataShouldThrowExceptionIfApiErrorOccured()
+    {
+        $class = new \ReflectionClass('\Sake\BlockchainWalletApi\Service\BlockchainWallet');
+        $method = $class->getMethod('extractData');
+        $method->setAccessible(true);
+
+        $response = new HttpResponse();
+        $response->setStatusCode(HttpResponse::STATUS_CODE_200);
+        $response->setContent(json_encode(array('error' => 'test error')));
+
+        $this->setExpectedException('\Sake\BlockchainWalletApi\Exception\RuntimeException', 'test error');
+        $method->invoke($this->getStubForTest(), $response, new Response\WalletBalance());
+    }
+
+    /**
      * Returns stub of test object
      *
      * @param string $response Http response
      * @param array $methods Methods for test doubles
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    protected function getStubForTest($response, array $methods = null)
+    protected function getStubForTest($response = null, array $methods = null)
     {
         $stub = $this->getMock(
             '\Sake\BlockchainWalletApi\Service\BlockchainWallet',
@@ -324,7 +422,10 @@ class BlockchainWalletTest extends TestCase
                 )
             )
         );
-        $stub->getClient()->getAdapter()->setResponse($response);
+
+        if (null !== $response) {
+            $stub->getClient()->getAdapter()->setResponse($response);
+        }
         return $stub;
     }
 
@@ -349,5 +450,52 @@ class BlockchainWalletTest extends TestCase
     protected function getLastRawRequestExpected($file)
     {
         return trim(file_get_contents($file));
+    }
+
+    /**
+     * data provider for the test method testGetUri()
+     *
+     * @return array
+     */
+    public function dataProviderForTestGetUri()
+    {
+        return array(
+            array(
+                'request' => new Request\AddressArchive(),
+                'expected' => 'https://blockchain.info/de/merchant/test43/archive_address',
+            ),
+            array(
+                'request' => new Request\AddressBalance(),
+                'expected' => 'https://blockchain.info/de/merchant/test43/address_balance',
+            ),
+            array(
+                'request' => new Request\AddressUnarchive(),
+                'expected' => 'https://blockchain.info/de/merchant/test43/unarchive_address',
+            ),
+            array(
+                'request' => new Request\AutoConsolidateAddresses(),
+                'expected' => 'https://blockchain.info/de/merchant/test43/auto_consolidate',
+            ),
+            array(
+                'request' => new Request\ListAddresses(),
+                'expected' => 'https://blockchain.info/de/merchant/test43/list',
+            ),
+            array(
+                'request' => new Request\NewAddress(),
+                'expected' => 'https://blockchain.info/de/merchant/test43/new_address',
+            ),
+            array(
+                'request' => new Request\Send(),
+                'expected' => 'https://blockchain.info/de/merchant/test43/payment',
+            ),
+            array(
+                'request' => new Request\SendMany(),
+                'expected' => 'https://blockchain.info/de/merchant/test43/sendmany',
+            ),
+            array(
+                'request' => new Request\WalletBalance(),
+                'expected' => 'https://blockchain.info/de/merchant/test43/balance',
+            ),
+        );
     }
 }
