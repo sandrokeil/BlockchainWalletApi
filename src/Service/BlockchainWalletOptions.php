@@ -14,7 +14,7 @@ use Zend\Http\Request;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\AbstractOptions;
 use Zend\Stdlib\Hydrator\ClassMethods;
-use Zend\Stdlib\Hydrator\HydrationInterface;
+use Zend\Stdlib\Hydrator\HydratorInterface;
 
 /**
  * Blockchain wallet api service options
@@ -61,7 +61,7 @@ class BlockchainWalletOptions extends AbstractOptions
     /**
      * Hydrator class
      *
-     * @var HydrationInterface
+     * @var HydratorInterface
      */
     protected $hydrator;
 
@@ -71,6 +71,13 @@ class BlockchainWalletOptions extends AbstractOptions
      * @var ResponsePluginManager
      */
     protected $responsePluginManager;
+
+    /**
+     * Plugin manager to create input filter
+     *
+     * @var InputFilterPluginManager
+     */
+    protected $inputFilterPluginManager;
 
     /**
      * Sets wallet identifier
@@ -175,25 +182,23 @@ class BlockchainWalletOptions extends AbstractOptions
     /**
      * Sets hydrator for hydration of result data to responses
      *
-     * @param \Zend\Stdlib\Hydrator\HydrationInterface $hydrator
+     * @param \Zend\Stdlib\Hydrator\HydratorInterface $hydrator
      */
-    public function setHydrator(HydrationInterface $hydrator)
+    public function setHydrator(HydratorInterface $hydrator)
     {
         $this->hydrator = $hydrator;
     }
 
     /**
-     * Returns hydrator for hydration of result data to responses. Lazy-loads a default hydrator instance with
-     * strategies if none registered
+     * Returns hydrator for hydration of result data to responses. Lazy-loads a default class methods hydrator instance
+     * if none registered
      *
-     * @return \Zend\Stdlib\Hydrator\HydrationInterface
+     * @return \Zend\Stdlib\Hydrator\HydratorInterface
      */
     public function getHydrator()
     {
         if (null === $this->hydrator) {
             $this->hydrator = new ClassMethods();
-            $this->hydrator->addStrategy('addresses', new Hydrator\AddressStrategy());
-            $this->hydrator->addStrategy('consolidated', new Hydrator\AddressListStrategy());
         }
         return $this->hydrator;
     }
@@ -219,5 +224,28 @@ class BlockchainWalletOptions extends AbstractOptions
     public function setResponsePluginManager(ServiceLocatorInterface $responsePluginManager)
     {
         $this->responsePluginManager = $responsePluginManager;
+    }
+
+    /**
+     * Returns input filter plugin manager. Lazy-loads a default input filter manager instance if none registered
+     *
+     * @return ServiceLocatorInterface
+     */
+    public function getInputFilterPluginManager()
+    {
+        if (null === $this->inputFilterPluginManager) {
+            $this->inputFilterPluginManager = new InputFilterPluginManager();
+        }
+        return $this->inputFilterPluginManager;
+    }
+
+    /**
+     * Service locator to retrieve input filter classes depending on request method
+     *
+     * @param ServiceLocatorInterface $inputFilterPluginManager
+     */
+    public function setInputFilterPluginManager(ServiceLocatorInterface $inputFilterPluginManager)
+    {
+        $this->inputFilterPluginManager = $inputFilterPluginManager;
     }
 }

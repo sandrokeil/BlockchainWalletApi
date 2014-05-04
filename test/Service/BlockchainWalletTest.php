@@ -16,6 +16,7 @@ use Sake\BlockchainWalletApi\Service\BlockchainWalletOptions;
 use Zend\Http;
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Http\Response as HttpResponse;
+use Zend\ServiceManager\ServiceManager;
 
 /**
  * Class BlockChainWalletTest
@@ -407,6 +408,8 @@ class BlockchainWalletTest extends TestCase
      */
     protected function getStubForTest($response = null, array $methods = null)
     {
+        $hydratorFactory = new \Sake\BlockchainWalletApi\Service\HydratorFactory();
+
         $stub = $this->getMock(
             '\Sake\BlockchainWalletApi\Service\BlockchainWallet',
             $methods,
@@ -418,6 +421,7 @@ class BlockchainWalletTest extends TestCase
                         'guid' => 'test43',
                         'main_password' => 'mainpwd',
                         'second_password' => 'secpwd',
+                        'hydrator' => $hydratorFactory->createService(new ServiceManager())
                     )
                 )
             )

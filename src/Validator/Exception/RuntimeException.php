@@ -7,9 +7,13 @@
  * @license   http://github.com/sandrokeil/BlockchainWalletApi/blob/master/LICENSE.txt New BSD License
  */
 
-return array(
-    'factories' => array(
-        'sake_bwa.service.default' => '\Sake\BlockchainWalletApi\Service\BlockchainWalletFactory',
-        'sake_bwa.service.hydrator' => '\Sake\BlockchainWalletApi\Service\HydratorFactory',
-    ),
-);
+namespace Sake\BlockchainWalletApi\Validator\Exception;
+
+/**
+ * Runtime exception
+ *
+ * Use this exception if the code has not the capacity to handle the request.
+ */
+class RuntimeException extends \RuntimeException implements ExceptionInterface
+{
+}

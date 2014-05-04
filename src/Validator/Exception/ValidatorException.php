@@ -7,9 +7,13 @@
  * @license   http://github.com/sandrokeil/BlockchainWalletApi/blob/master/LICENSE.txt New BSD License
  */
 
-return array(
-    'factories' => array(
-        'sake_bwa.service.default' => '\Sake\BlockchainWalletApi\Service\BlockchainWalletFactory',
-        'sake_bwa.service.hydrator' => '\Sake\BlockchainWalletApi\Service\HydratorFactory',
-    ),
-);
+namespace Sake\BlockchainWalletApi\Validator\Exception;
+
+/**
+ * Validator exception
+ *
+ * Use this exception vf validation of $value is impossible
+ */
+class ValidatorException extends RuntimeException
+{
+}
