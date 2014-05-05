@@ -400,6 +400,23 @@ class BlockchainWalletTest extends TestCase
     }
 
     /**
+     * Test if isValid() should correct validate requests
+     *
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::isValid
+     * @dataProvider dataProviderForTestIsValid
+     * @group service
+     *
+     * @param Request\RequestInterface $request
+     * @param string $expected Expected validation result
+     */
+    public function testIsValid(Request\RequestInterface $request, $expected)
+    {
+        $service = $this->getStubForTest();
+
+        $this->assertEquals($expected, $service->isValid($request));
+    }
+
+    /**
      * Returns stub of test object
      *
      * @param string $response Http response
@@ -499,6 +516,103 @@ class BlockchainWalletTest extends TestCase
             array(
                 'request' => new Request\WalletBalance(),
                 'expected' => 'https://blockchain.info/de/merchant/test43/balance',
+            ),
+        );
+    }
+
+    /**
+     * data provider for the test method testIsValid()
+     *
+     * @return array
+     */
+    public function dataProviderForTestIsValid()
+    {
+        $addressArchive = new Request\AddressArchive();
+        $addressArchive->setAddress('13c7aMAEoS1QkwK49GctvEE7ZBkSfvaXCo');
+
+        $addressBalance = new Request\AddressBalance();
+        $addressBalance->setAddress('13c7aMAEoS1QkwK49GctvEE7ZBkSfvaXCo');
+
+        $addressBalanceInvalid = clone $addressBalance;
+        $addressBalanceInvalid->setConfirmations(-1);
+
+        $addressUnarchive = new Request\AddressUnarchive();
+        $addressUnarchive->setAddress('13c7aMAEoS1QkwK49GctvEE7ZBkSfvaXCo');
+
+        $autoConsolidateAddresses = new Request\AutoConsolidateAddresses();
+        $autoConsolidateAddresses->setDays(60);
+
+        $listAddressesInvalid = new Request\ListAddresses();
+        $listAddressesInvalid->setConfirmations(400);
+
+        $send = new Request\Send();
+        $send->setTo('13c7aMAEoS1QkwK49GctvEE7ZBkSfvaXCo');
+        $send->setAmount(10000);
+
+        return array(
+            array(
+                'request' => $addressArchive,
+                'expected' => true,
+            ),
+            array(
+                'request' => new Request\AddressArchive(),
+                'expected' => false,
+            ),
+            array(
+                'request' => $addressBalance,
+                'expected' => true,
+            ),
+            array(
+                'request' => $addressBalanceInvalid,
+                'expected' => false,
+            ),
+            array(
+                'request' => new Request\AddressBalance(),
+                'expected' => false,
+            ),
+            array(
+                'request' => $addressUnarchive,
+                'expected' => true,
+            ),
+            array(
+                'request' => new Request\AddressUnarchive(),
+                'expected' => false,
+            ),
+            array(
+                'request' => $autoConsolidateAddresses,
+                'expected' => true,
+            ),
+            array(
+                'request' => new Request\AutoConsolidateAddresses(),
+                'expected' => false,
+            ),
+            array(
+                'request' => $listAddressesInvalid,
+                'expected' => false,
+            ),
+            array(
+                'request' => new Request\ListAddresses(),
+                'expected' => true,
+            ),
+            array(
+                'request' => new Request\NewAddress(),
+                'expected' => true,
+            ),
+            array(
+                'request' => $send,
+                'expected' => true,
+            ),
+            array(
+                'request' => new Request\Send(),
+                'expected' => false,
+            ),
+            array(
+                'request' => new Request\SendMany(),
+                'expected' => false,
+            ),
+            array(
+                'request' => new Request\WalletBalance(),
+                'expected' => true,
             ),
         );
     }

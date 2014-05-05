@@ -12,4 +12,9 @@ return array(
         'sake_bwa.service.default' => '\Sake\BlockchainWalletApi\Service\BlockchainWalletFactory',
         'sake_bwa.service.hydrator' => '\Sake\BlockchainWalletApi\Service\HydratorFactory',
     ),
+    'invokables' => array(
+        'sake_bwa.service.request' => '\Sake\BlockchainWalletApi\Service\RequestPluginManager',
+        'sake_bwa.service.response' => '\Sake\BlockchainWalletApi\Service\ResponsePluginManager',
+        'sake_bwa.service.input_filter' => '\Sake\BlockchainWalletApi\Service\InputFilterPluginManager',
+    ),
 );

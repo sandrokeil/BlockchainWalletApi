@@ -14,11 +14,11 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * Input filter factory for address balance request
+ * Input filter factory for send many request
  *
- * Creates input filter for address balance request validation
+ * Creates input filter for send many request validation
  */
-class AddressBalanceFactory implements FactoryInterface
+class SendManyFactory implements FactoryInterface
 {
     /**
      * Create service
@@ -30,35 +30,32 @@ class AddressBalanceFactory implements FactoryInterface
     {
         $factory = new Factory();
         $inputFilter = $factory->createInputFilter(array(
-            'address' => array(
-                'name'       => 'address',
+            'recipients' => array(
+                'name'       => 'recipients',
                 'required'   => true,
                 'validators' => array(
                     array(
                         'name' => 'not_empty',
-                        'break_chain_on_failure' => true,
                     ),
+                ),
+            ),
+            'from' => array(
+                'name'       => 'from',
+                'required'   => false,
+                'validators' => array(
                     array(
                         'name' => '\Sake\BlockchainWalletApi\Validator\BitcoinAddress',
                     ),
                 ),
             ),
-            'confirmations' => array(
-                'name'       => 'confirmations',
-                'required'   => true,
+            'fee' => array(
+                'name'       => 'fee',
+                'required'   => false,
                 'validators' => array(
                     array(
                         'name' => 'greater_than',
                         'options' => array(
-                            'min' => 0,
-                            'inclusive' => true
-                        )
-                    ),
-                    array(
-                        'name' => 'less_than',
-                        'options' => array(
-                            'max' => 120,
-                            'inclusive' => true
+                            'min' => 1000, // satoshi
                         )
                     ),
                 ),

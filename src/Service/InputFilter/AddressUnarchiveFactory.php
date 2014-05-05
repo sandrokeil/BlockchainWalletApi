@@ -14,11 +14,11 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * Input filter factory for address balance request
+ * Input filter factory for address unarchive request
  *
- * Creates input filter for address balance request validation
+ * Creates input filter for address unarchive request validation
  */
-class AddressBalanceFactory implements FactoryInterface
+class AddressUnarchiveFactory implements FactoryInterface
 {
     /**
      * Create service
@@ -40,26 +40,6 @@ class AddressBalanceFactory implements FactoryInterface
                     ),
                     array(
                         'name' => '\Sake\BlockchainWalletApi\Validator\BitcoinAddress',
-                    ),
-                ),
-            ),
-            'confirmations' => array(
-                'name'       => 'confirmations',
-                'required'   => true,
-                'validators' => array(
-                    array(
-                        'name' => 'greater_than',
-                        'options' => array(
-                            'min' => 0,
-                            'inclusive' => true
-                        )
-                    ),
-                    array(
-                        'name' => 'less_than',
-                        'options' => array(
-                            'max' => 120,
-                            'inclusive' => true
-                        )
                     ),
                 ),
             ),

@@ -14,11 +14,11 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * Input filter factory for address balance request
+ * Input filter factory for new address request
  *
- * Creates input filter for address balance request validation
+ * Creates input filter for new address request validation
  */
-class AddressBalanceFactory implements FactoryInterface
+class AutoConsolidateAddressesFactory implements FactoryInterface
 {
     /**
      * Create service
@@ -30,35 +30,14 @@ class AddressBalanceFactory implements FactoryInterface
     {
         $factory = new Factory();
         $inputFilter = $factory->createInputFilter(array(
-            'address' => array(
-                'name'       => 'address',
-                'required'   => true,
-                'validators' => array(
-                    array(
-                        'name' => 'not_empty',
-                        'break_chain_on_failure' => true,
-                    ),
-                    array(
-                        'name' => '\Sake\BlockchainWalletApi\Validator\BitcoinAddress',
-                    ),
-                ),
-            ),
-            'confirmations' => array(
-                'name'       => 'confirmations',
+            'days' => array(
+                'name'       => 'days',
                 'required'   => true,
                 'validators' => array(
                     array(
                         'name' => 'greater_than',
                         'options' => array(
                             'min' => 0,
-                            'inclusive' => true
-                        )
-                    ),
-                    array(
-                        'name' => 'less_than',
-                        'options' => array(
-                            'max' => 120,
-                            'inclusive' => true
                         )
                     ),
                 ),

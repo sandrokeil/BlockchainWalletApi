@@ -8,7 +8,13 @@
 [![Total Downloads](https://poser.pugx.org/sandrokeil/blockchain-wallet-api/downloads.png)](https://packagist.org/packages/sandrokeil/blockchain-wallet-api)
 [![License](https://poser.pugx.org/sandrokeil/blockchain-wallet-api/license.png)](https://packagist.org/packages/sandrokeil/blockchain-wallet-api)
 
-Zend Framework 2 client library for blockchain wallet api. The usage is simple. Configure request, call the service and access the response data via objects.
+Zend Framework 2 client library for [blockchain wallet api](https://blockchain.info/en/api/blockchain_wallet_api). The usage is simple. Configure request, call the service and access the response data via objects.
+
+ * **Adapts To Your Needs.** There are several possibilities to configure this module.
+ * **Well tested.** Besides unit test and continuous integration/inspection this solution is also ready for production use.
+ * **Great foundations.** Based on [Zend Framework 2](https://github.com/zendframework/zf2) and [Easy Config](https://github.com/sandrokeil/EasyConfig)
+ * **Every change is tracked**. Want to know whats new? Take a look at [CHANGELOG.md](https://github.com/sandrokeil/BlockchainWalletApi/blob/master/CHANGELOG.md)
+ * **Listen to your ideas.** Have a great idea? Bring your tested pull request or open a new issue.
 
 ## Installation
 
@@ -53,17 +59,21 @@ use Sake\BlockchainWalletApi;
 // $sl is the service locator
 $blockchain = $sl->get('sake_bwa.service.default');
 
+$request = $sl->get('sake_bwa.service.request')->get('send');
+// or
 $request = new BlockchainWalletApi\Request\Send();
 
 $request->setAmount(10000000); // in satoshi
 $request->setTo('1A8JiWcwvpY7tAopUkSnGuEYHmzGYfZPiq');
 
-
 try {
-	/* @var $response BlockchainWalletApi\Response\Send */
-	$response = $service->send($request);
-    // access to response data
-    $transactionHash = $response->getTxHash();
+    // validate request
+    if ($blockchain->isValid($request)) {
+        /* @var $response BlockchainWalletApi\Response\Send */
+        $response = $service->send($request);
+        // access to response data
+        $transactionHash = $response->getTxHash();
+    }
 } catch (BlockchainWalletApi\Exception\ExceptionInterface $exception) {
     // error handling
 }
@@ -79,13 +89,19 @@ use Sake\BlockchainWalletApi;
 // $sl is the service locator
 $blockchain = $sl->get('sake_bwa.service.default');
 
+$request = $sl->get('sake_bwa.service.request')->get('balance');
+// or
 $request = new BlockchainWalletApi\Request\WalletBalance();
 
+
 try {
-	/* @var $response BlockchainWalletApi\Response\WalletBalance */
-	$response = $blockchain->send($request);
-    // access to response data
-    $balance = $response->getBalance(); // in satoshi
+    // validate request
+    if ($blockchain->isValid($request)) {
+        /* @var $response BlockchainWalletApi\Response\WalletBalance */
+        $response = $blockchain->send($request);
+        // access to response data
+        $balance = $response->getBalance(); // in satoshi
+    }
 } catch (BlockchainWalletApi\Exception\ExceptionInterface $exception) {
     // error handling
 }
@@ -117,9 +133,11 @@ return array(
 
 ## Registered service names
  * `sake_bwa.service.default`: a \Sake\BlockchainWalletApi\Service\BlockchainWallet instance to send requests to the api
+ * `sake_bwa.service.response`: a \Sake\BlockchainWalletApi\Service\ResponsePluginManager Service plugin manager to create responses via api method name
+ * `sake_bwa.service.request`: a \Sake\BlockchainWalletApi\Service\RequestPluginManager Service plugin manager to create requests via api method name
+ * `sake_bwa.service.input_filter`: a \Sake\BlockchainWalletApi\Service\InputFilterPluginManager Service plugin manager to create input filter via api method name
+ * `sake_bwa.service.hydrator`: a \Zend\Stdlib\Hydrator\ClassMethods instance with strategies and filters for requests/responses
 
 ## Todo's
-
- * Data validation, especially requests
  * More unit tests
  * Satoshi converter/filter

@@ -14,11 +14,11 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * Input filter factory for address balance request
+ * Input filter factory for send request
  *
- * Creates input filter for address balance request validation
+ * Creates input filter for send request validation
  */
-class AddressBalanceFactory implements FactoryInterface
+class SendFactory implements FactoryInterface
 {
     /**
      * Create service
@@ -30,8 +30,8 @@ class AddressBalanceFactory implements FactoryInterface
     {
         $factory = new Factory();
         $inputFilter = $factory->createInputFilter(array(
-            'address' => array(
-                'name'       => 'address',
+            'to' => array(
+                'name'       => 'to',
                 'required'   => true,
                 'validators' => array(
                     array(
@@ -43,22 +43,35 @@ class AddressBalanceFactory implements FactoryInterface
                     ),
                 ),
             ),
-            'confirmations' => array(
-                'name'       => 'confirmations',
+            'amount' => array(
+                'name'       => 'amount',
                 'required'   => true,
                 'validators' => array(
                     array(
                         'name' => 'greater_than',
                         'options' => array(
                             'min' => 0,
-                            'inclusive' => true
                         )
                     ),
+                ),
+            ),
+            'from' => array(
+                'name'       => 'from',
+                'required'   => false,
+                'validators' => array(
                     array(
-                        'name' => 'less_than',
+                        'name' => '\Sake\BlockchainWalletApi\Validator\BitcoinAddress',
+                    ),
+                ),
+            ),
+            'fee' => array(
+                'name'       => 'fee',
+                'required'   => false,
+                'validators' => array(
+                    array(
+                        'name' => 'greater_than',
                         'options' => array(
-                            'max' => 120,
-                            'inclusive' => true
+                            'min' => 1000, // satoshi
                         )
                     ),
                 ),
