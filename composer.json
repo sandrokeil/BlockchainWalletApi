@@ -6,9 +6,14 @@
     "type": "library",
     "keywords": [
         "zf2",
+        "blockhain wallet api",
+        "bitcoin",
         "blockhain",
         "wallet",
-        "api"
+        "api",
+        "webservice",
+        "client",
+        "payment"
     ],
     "authors": [
         {"name": "Sandro Keil", "homepage": "https://github.com/sandrokeil"}

@@ -141,3 +141,4 @@ return array(
 ## Todo's
  * More unit tests
  * Satoshi converter/filter
+ * View Helper to display data
