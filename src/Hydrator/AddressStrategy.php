@@ -57,7 +57,6 @@ class AddressStrategy implements StrategyInterface
         foreach ($value as $data) {
             $addresses[$data['address']] = new Response\Address();
             $this->getHydrator()->hydrate($data, $addresses[$data['address']]);
-
         }
         return $addresses;
     }

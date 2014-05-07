@@ -474,6 +474,30 @@ class BlockchainWalletTest extends TestCase
     }
 
     /**
+     * Tests getOptions()
+     *
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::getOptions
+     * @group service
+     */
+    public function testGetOptions()
+    {
+        $service = $this->getStubForTest();
+        $this->assertInstanceOf('\Sake\BlockchainWalletApi\Service\BlockchainWalletOptions', $service->getOptions());
+    }
+
+    /**
+     * Tests getClient()
+     *
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWallet::getClient
+     * @group service
+     */
+    public function testGetClient()
+    {
+        $service = $this->getStubForTest();
+        $this->assertInstanceOf('\Zend\Http\Client', $service->getClient());
+    }
+
+    /**
      * data provider for the test method testGetUri()
      *
      * @return array

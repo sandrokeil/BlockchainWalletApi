@@ -11,42 +11,15 @@ namespace SakeTest\BlockchainWalletApi\Service;
 
 use Zend\Http;
 use Zend\Test\Util\ModuleLoader;
-use PHPUnit_Framework_TestCase as TestCase;
+use SakeTest\BlockchainWalletApi\Service\AbstractFactoryTestCase as TestCase;
 
 /**
  * Class BlockChainWalletFactoryTest
  *
  * Tests integrity of \Sake\BlockchainWalletApi\Service\BlockchainWalletFactory
  */
-class BlockchainWalletFactoryTest extends TestCase
+class BlockchainWalletFactoryTestTestCase extends TestCase
 {
-    /**
-     * @var \Zend\ServiceManager\ServiceManager
-     */
-    protected $serviceManager;
-
-    /**
-     * @var ModuleLoader
-     */
-    protected $moduleLoader;
-
-    /**
-     * Setup tests
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        // Load the user-defined test configuration file, if it exists; otherwise, load default
-        if (is_readable('test/TestConfig.php')) {
-            $testConfig = require 'test/TestConfig.php';
-        } else {
-            $testConfig = require 'test/TestConfig.php.dist';
-        }
-        $this->moduleLoader = new ModuleLoader($testConfig);
-        $this->serviceManager = $this->moduleLoader->getServiceManager();
-    }
-
     /**
      * Tests createService() returns a valid and configured service instance.
      *
