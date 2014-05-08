@@ -11,7 +11,6 @@ namespace Sake\BlockchainWalletApi\Hydrator;
 
 use Sake\BlockchainWalletApi\Exception\RuntimeException;
 use Zend\Stdlib\Hydrator\Strategy\StrategyInterface;
-use \Sake\BlockchainWalletApi\Response;
 
 /**
  * Strategy for a list of addresses from request

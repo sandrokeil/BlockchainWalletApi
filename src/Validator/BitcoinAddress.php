@@ -84,7 +84,9 @@ class BitcoinAddress extends AbstractValidator
         $chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
         $return = '0';
 
-        for ($i = 0; $i < strlen($address); $i++) {
+        $length = strlen($address);
+
+        for ($i = 0; $i < $length; $i++) {
             $current = (string) strpos($chars, $address[$i]);
             $return = (string) bcmul($return, '58', 0);
             $return = (string) bcadd($return, $current, 0);
