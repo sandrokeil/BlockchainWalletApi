@@ -13,7 +13,7 @@ return array(
         'connection' => array(
             'default' => array(
                 'options' => array(
-                    // see \Sake\BlockchainWalletApi\Service\BlockchainWalletOptions for all configurations
+                    // see \Sake\BlockchainWalletApi\Service\BlockchainWalletOptions for all options
                     'url' => 'https://blockchain.info/de/merchant/', // note on your country
                     'guid' => 'your My Wallet identifier (found on the login page)',
                     'main_password' => 'Your Main My wallet password',

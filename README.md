@@ -14,8 +14,8 @@ Zend Framework 2 client library for [blockchain wallet api](https://blockchain.i
  * **Adapts To Your Needs.** There are several possibilities to configure this module.
  * **Well tested.** Besides unit test and continuous integration/inspection this solution is also ready for production use.
  * **Great foundations.** Based on [Zend Framework 2](https://github.com/zendframework/zf2) and [Easy Config](https://github.com/sandrokeil/EasyConfig)
- * **Every change is tracked**. Want to know whats new? Take a look at [CHANGELOG.md](https://github.com/sandrokeil/BlockchainWalletApi/blob/master/CHANGELOG.md)
- * **Listen to your ideas.** Have a great idea? Bring your tested pull request or open a new issue.
+ * **Every change is tracked**. Want to know whats new? Take a look at [CHANGELOG.md](CHANGELOG.md)
+ * **Listen to your ideas.** Have a great idea? Bring your tested pull request or open a new issue. See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Installation
 
@@ -50,11 +50,10 @@ These request classes matches to api methods
  * AddressUnarchive => unarchive_address
  * AutoConsolidateAddresses => auto_consolidate
 
-Here is an example how to send bitcoins to an bitcoin address:
+Here is an example how to send bitcoins to a bitcoin address:
 
 ```php
 <?php
-
 use Sake\BlockchainWalletApi;
 
 // $sl is the service locator
@@ -84,7 +83,6 @@ Here is an example how to retrieve wallet balance:
 
 ```php
 <?php
-
 use Sake\BlockchainWalletApi;
 
 // $sl is the service locator
@@ -106,6 +104,19 @@ try {
 } catch (BlockchainWalletApi\Exception\ExceptionInterface $exception) {
     // error handling
 }
+```
+Here is an example how to use satoshi view helper to convert satoshi to other unit:
+
+```php
+<?php
+// assume we are in a template
+
+/* @var $response BlockchainWalletApi\Response\WalletBalance */
+echo $this->satoshi($response->getBalanace(), 'BTC'); // Bitcoin
+// or
+echo $this->satoshi($response->getBalanace(), 'mBTC'); // Milli Bits
+// or
+echo $this->satoshi($response->getBalanace(), 'uBTC'); // Micro Bitcoin
 ```
 
 ## Configuration
@@ -139,7 +150,5 @@ return array(
  * `sake_bwa.service.input_filter`: a \Sake\BlockchainWalletApi\Service\InputFilterPluginManager Service plugin manager to create input filter via api method name
  * `sake_bwa.service.hydrator`: a \Zend\Stdlib\Hydrator\ClassMethods instance with strategies and filters for requests/responses
 
-## Todo's
- * More unit tests
- * Satoshi converter/filter
- * View Helper to display data
+## Registered view helper
+ * `satoshi`: a \Zend\View\Helper\AbstractHelper instance which converts satoshi to other unit e.g. bitcoin

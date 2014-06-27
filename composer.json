@@ -5,10 +5,10 @@
     "license": "BSD-3-Clause",
     "type": "library",
     "keywords": [
+        "blockhain",
+        "bitcoin",
         "zf2",
         "blockhain wallet api",
-        "bitcoin",
-        "blockhain",
         "wallet",
         "api",
         "webservice",
@@ -39,9 +39,11 @@
         "zendframework/zend-serializer": "~2.2",
         "zendframework/zend-log": "~2.2",
         "zendframework/zend-modulemanager": "~2.2",
+        "zendframework/zend-view": "~2.2",
         "sandrokeil/citools": "~1.0"
     },
     "suggest": {
+        "zendframework/zend-view": "Zend\\View to use satoshi view helper",
         "zendframework/zend-modulemanager": "Zend\\ModuleManager to use default module configuration e.g. services"
     }
 }

@@ -16,7 +16,6 @@ use Zend\Http\Request as HttpRequest;
 use Zend\Http\Request;
 use Zend\Http\Response as HttpResponse;
 use Sake\BlockchainWalletApi\Exception;
-use Zend\InputFilter\InputFilter;
 
 /**
  * Blockchain wallet api service
@@ -82,7 +81,7 @@ class BlockchainWallet
      */
     public function isValid(RequestInterface $request)
     {
-        /* @var $inputFilter InputFilter  */
+        /* @var $inputFilter \Zend\InputFilter\InputFilter  */
         $inputFilter = $this->getOptions()->getInputFilterPluginManager()->get($request->getMethod());
         $inputFilter->setData($this->getOptions()->getHydrator()->extract($request));
         return $inputFilter->isValid();
