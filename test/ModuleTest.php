@@ -33,4 +33,20 @@ class ModuleTest extends \PHPUnit_Framework_TestCase
             'Service manager configuration could not be read'
         );
     }
+
+    /**
+     * Tests getViewHelperConfig() should should return view helper configuration
+     *
+     * @covers \Sake\BlockchainWalletApi\Module::getViewHelperConfig
+     */
+    public function testGetViewHelperConfig()
+    {
+        $cut = new Module();
+        $config = $cut->getViewHelperConfig();
+        $this->assertSame(
+            @include 'config/view_helper.config.php',
+            $config,
+            'View helper configuration could not be read'
+        );
+    }
 }

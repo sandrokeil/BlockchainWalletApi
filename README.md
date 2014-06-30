@@ -5,7 +5,7 @@
 [![Coverage Status](https://coveralls.io/repos/sandrokeil/BlockchainWalletApi/badge.png)](https://coveralls.io/r/sandrokeil/BlockchainWalletApi)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/a9184d9a-95bf-41c1-82e1-3d6d745602a2/mini.png)](https://insight.sensiolabs.com/projects/a9184d9a-95bf-41c1-82e1-3d6d745602a2)
 [![Latest Stable Version](https://poser.pugx.org/sandrokeil/blockchain-wallet-api/v/stable.png)](https://packagist.org/packages/sandrokeil/blockchain-wallet-api)
-[![Dependency Status](https://www.versioneye.com/user/projects/53615c9cfe0d07b45c000082/badge.png)](https://www.versioneye.com/user/projects/53615c9cfe0d07b45c000082)
+[![Dependency Status](https://www.versioneye.com/user/projects/53615c9cfe0d07b45c000082/badge.svg)](https://www.versioneye.com/user/projects/53615c9cfe0d07b45c000082)
 [![Total Downloads](https://poser.pugx.org/sandrokeil/blockchain-wallet-api/downloads.png)](https://packagist.org/packages/sandrokeil/blockchain-wallet-api)
 [![License](https://poser.pugx.org/sandrokeil/blockchain-wallet-api/license.png)](https://packagist.org/packages/sandrokeil/blockchain-wallet-api)
 
@@ -59,7 +59,8 @@ use Sake\BlockchainWalletApi;
 // $sl is the service locator
 $blockchain = $sl->get('sake_bwa.service.default');
 
-$request = $sl->get('sake_bwa.service.request')->get('send');
+/* @var $request BlockchainWalletApi\Request\Send */
+$request = $sl->get('sake_bwa.service.request')->get('payment');
 // or
 $request = new BlockchainWalletApi\Request\Send();
 
@@ -86,8 +87,10 @@ Here is an example how to retrieve wallet balance:
 use Sake\BlockchainWalletApi;
 
 // $sl is the service locator
+/* @var $blockchain BlockchainWalletApi\Service\BlockchainWallet */
 $blockchain = $sl->get('sake_bwa.service.default');
 
+/* @var $request BlockchainWalletApi\Request\WalletBalance */
 $request = $sl->get('sake_bwa.service.request')->get('balance');
 // or
 $request = new BlockchainWalletApi\Request\WalletBalance();
@@ -111,7 +114,7 @@ Here is an example how to use satoshi view helper to convert satoshi to other un
 <?php
 // assume we are in a template
 
-/* @var $response BlockchainWalletApi\Response\WalletBalance */
+/* @var $response \Sake\BlockchainWalletApi\Response\WalletBalance */
 echo $this->satoshi($response->getBalanace(), 'BTC'); // Bitcoin
 // or
 echo $this->satoshi($response->getBalanace(), 'mBTC'); // Milli Bits
@@ -151,4 +154,7 @@ return array(
  * `sake_bwa.service.hydrator`: a \Zend\Stdlib\Hydrator\ClassMethods instance with strategies and filters for requests/responses
 
 ## Registered view helper
+To use this view helper you must add `zendframework/zend-view` to your composer dependencies.
+
  * `satoshi`: a \Zend\View\Helper\AbstractHelper instance which converts satoshi to other unit e.g. bitcoin
+

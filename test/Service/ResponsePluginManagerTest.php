@@ -21,6 +21,20 @@ use PHPUnit_Framework_TestCase as TestCase;
 class ResponsePluginManagerTest extends TestCase
 {
     /**
+     * Tests validatePlugin() should throw runtime exception if response interface is missing
+     *
+     * @covers \Sake\BlockchainWalletApi\Service\ResponsePluginManager::validatePlugin
+     * @group service
+     */
+    public function testValidatePluginThrowsRuntimeExceptionIfInterfaceIsMissong()
+    {
+        $manager = new ResponsePluginManager();
+
+        $this->setExpectedException('\Sake\BlockchainWalletApi\Exception\RuntimeException', 'Plugin of type');
+        $manager->validatePlugin(new \stdClass());
+    }
+
+    /**
      * Tests validatePlugin() throws no exception for available response classes
      *
      * @dataProvider dataProviderForTestValidatePlugin
@@ -33,20 +47,6 @@ class ResponsePluginManagerTest extends TestCase
         $manager = new ResponsePluginManager();
 
         $this->assertInstanceOf($expected, $manager->get($plugin));
-    }
-
-    /**
-     * Tests validatePlugin() should throw runtime exception if response interface is missing
-     *
-     * @covers \Sake\BlockchainWalletApi\Service\ResponsePluginManager::validatePlugin
-     * @group service
-     */
-    public function testValidatePluginThrowsRuntimeExceptionIfInterfaceIsMissong()
-    {
-        $manager = new ResponsePluginManager();
-
-        $this->setExpectedException('\Sake\BlockchainWalletApi\Exception\RuntimeException', 'Plugin of type');
-        $manager->validatePlugin(new \stdClass());
     }
 
     /**

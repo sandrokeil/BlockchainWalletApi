@@ -21,7 +21,7 @@ use Zend\Stdlib\ArrayUtils;
 class BitcoinAddressTest extends TestCase
 {
     /**
-     * Tests if getMethod returns the correct api method
+     * Tests if isValid checks bitcoin address format
      *
      * @dataProvider dataProviderForTestIsValid
      * @group validator
@@ -43,6 +43,24 @@ class BitcoinAddressTest extends TestCase
         } else {
             $this->assertEquals($expected, $cut->isValid($address));
         }
+    }
+
+    /**
+     * Tests if isValid returns false
+     *
+     * @group validator
+     *
+     * @covers \Sake\BlockchainWalletApi\Validator\BitcoinAddress::isValid
+     */
+    public function testIsValidWithWrongChecksum()
+    {
+        $cut = $this->getMock('\Sake\BlockchainWalletApi\Validator\BitcoinAddress', array('decode'));
+
+        $cut->expects($this->once())
+            ->method('decode')
+            ->will($this->returnValue('0006F1B66FFE49DF7FCE684DF16C62F59DC9ADBD3F4FEC479B'));
+
+        $this->assertFalse($cut->isValid('ThisAddressIsIgnored'));
     }
 
     /**

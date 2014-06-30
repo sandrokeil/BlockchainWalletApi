@@ -11,7 +11,6 @@ namespace Sake\BlockchainWalletApi\Service;
 
 use Sake\BlockchainWalletApi\Exception\RuntimeException;
 use Sake\EasyConfig\Service\AbstractConfigurableFactory;
-use Zend\Http\Client;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -115,7 +114,7 @@ class BlockchainWalletFactory extends AbstractConfigurableFactory implements Fac
             $client = $serviceLocator->get($config['client']);
         }
 
-        if (!$client instanceof Client) {
+        if (!$client instanceof \Zend\Http\Client) {
             throw new RuntimeException(
                 sprintf('Class "%s" is not an instance of \Zend\Http\Client', get_class($client))
             );

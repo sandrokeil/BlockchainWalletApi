@@ -10,7 +10,7 @@
 namespace SakeTest\BlockchainWalletApi\Service;
 
 use Zend\Http;
-use Zend\Test\Util\ModuleLoader;
+use Zend\ServiceManager\ServiceManager;
 use SakeTest\BlockchainWalletApi\Service\AbstractFactoryTestCase as TestCase;
 
 /**
@@ -86,5 +86,46 @@ class BlockchainWalletFactoryTestTestCase extends TestCase
         );
 
         $stub->createService($this->serviceManager);
+    }
+
+    /**
+     * Tests getClient() returns default zend http client
+     *
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWalletFactory::getClient
+     * @group factory
+     */
+    public function testGetClientShouldReturnZendHttpClient()
+    {
+        $reflection = new \ReflectionClass('\Sake\BlockchainWalletApi\Service\BlockchainWalletFactory');
+        $method = $reflection->getMethod('getClient');
+        $method->setAccessible(true);
+
+        $cut = new \Sake\BlockchainWalletApi\Service\BlockchainWalletFactory();
+
+        $this->assertInstanceOf('Zend\Http\Client', $method->invoke($cut, new ServiceManager(), array()));
+    }
+
+    /**
+     * Tests getClient() throws runtime exception if no zend http client was returned from service manager
+     *
+     * @covers \Sake\BlockchainWalletApi\Service\BlockchainWalletFactory::getClient
+     * @group factory
+     */
+    public function testGetClientShouldThrowRuntimeExceptionIfClientWrong()
+    {
+        $reflection = new \ReflectionClass('\Sake\BlockchainWalletApi\Service\BlockchainWalletFactory');
+        $method = $reflection->getMethod('getClient');
+        $method->setAccessible(true);
+
+        $cut = new \Sake\BlockchainWalletApi\Service\BlockchainWalletFactory();
+
+        $sl = new ServiceManager(new \Zend\ServiceManager\Config(array(
+            'services' => array(
+                'testclient' => new \stdClass()
+            )
+        )));
+
+        $this->setExpectedException('\Sake\BlockchainWalletApi\Exception\RuntimeException', 'Class');
+        $method->invoke($cut, $sl, array('client' => 'testclient'));
     }
 }
