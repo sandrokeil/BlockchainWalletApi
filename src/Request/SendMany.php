@@ -176,7 +176,7 @@ class SendMany implements RequestInterface
     /**
      * Returns list of recipients objects
      *
-     * @return array
+     * @return array List of recipient objects
      */
     public function getRecipients()
     {
