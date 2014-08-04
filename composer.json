@@ -5,10 +5,10 @@
     "license": "BSD-3-Clause",
     "type": "library",
     "keywords": [
-        "blockhain",
+        "blockchain",
         "bitcoin",
         "zf2",
-        "blockhain wallet api",
+        "blockchain wallet api",
         "wallet",
         "api",
         "webservice",
