@@ -18,7 +18,7 @@ use SakeTest\BlockchainWalletApi\Service\AbstractFactoryTestCase as TestCase;
  *
  * Tests integrity of \Sake\BlockchainWalletApi\Service\BlockchainWalletFactory
  */
-class BlockchainWalletFactoryTestTestCase extends TestCase
+class BlockchainWalletFactoryTest extends TestCase
 {
     /**
      * Tests createService() returns a valid and configured service instance.
