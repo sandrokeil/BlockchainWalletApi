@@ -1,5 +1,13 @@
 # Blockchain Wallet Api module for Zend Framework 2
 
+> You want an easy client for the blockchain wallet api?
+
+> You want to configure request, call the service and access the response data via objects?
+
+> You want to display bitcoin in mBTC or uBTC?
+
+> This module comes to the rescue!
+
 [![Build Status](https://travis-ci.org/sandrokeil/BlockchainWalletApi.png?branch=master)](https://travis-ci.org/sandrokeil/BlockchainWalletApi)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sandrokeil/BlockchainWalletApi/badges/quality-score.png?s=e0089b63bdd99801480a5c7aedbda372767990ab)](https://scrutinizer-ci.com/g/sandrokeil/BlockchainWalletApi/)
 [![Coverage Status](https://coveralls.io/repos/sandrokeil/BlockchainWalletApi/badge.png)](https://coveralls.io/r/sandrokeil/BlockchainWalletApi)
