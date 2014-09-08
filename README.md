@@ -1,10 +1,18 @@
 # Blockchain Wallet Api module for Zend Framework 2
 
+> You want an easy client for the blockchain wallet api?
+
+> You want to configure request, call the service and access the response data via objects?
+
+> You want to display bitcoin in mBTC or uBTC?
+
+> This module comes to the rescue!
+
 [![Build Status](https://travis-ci.org/sandrokeil/BlockchainWalletApi.png?branch=master)](https://travis-ci.org/sandrokeil/BlockchainWalletApi)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sandrokeil/BlockchainWalletApi/badges/quality-score.png?s=e0089b63bdd99801480a5c7aedbda372767990ab)](https://scrutinizer-ci.com/g/sandrokeil/BlockchainWalletApi/)
 [![Coverage Status](https://coveralls.io/repos/sandrokeil/BlockchainWalletApi/badge.png)](https://coveralls.io/r/sandrokeil/BlockchainWalletApi)
 [![HHVM Status](http://hhvm.h4cc.de/badge/sandrokeil/blockchain-wallet-api.svg)](http://hhvm.h4cc.de/package/sandrokeil/blockchain-wallet-api)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/a9184d9a-95bf-41c1-82e1-3d6d745602a2/mini.png)](https://insight.sensiolabs.com/projects/a9184d9a-95bf-41c1-82e1-3d6d745602a2)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/eb0ea220-d358-431e-8862-1e85c84ad06a/mini.png)](https://insight.sensiolabs.com/projects/eb0ea220-d358-431e-8862-1e85c84ad06a)
 [![Latest Stable Version](https://poser.pugx.org/sandrokeil/blockchain-wallet-api/v/stable.png)](https://packagist.org/packages/sandrokeil/blockchain-wallet-api)
 [![Dependency Status](https://www.versioneye.com/user/projects/53615c9cfe0d07b45c000082/badge.svg)](https://www.versioneye.com/user/projects/53615c9cfe0d07b45c000082)
 [![Total Downloads](https://poser.pugx.org/sandrokeil/blockchain-wallet-api/downloads.png)](https://packagist.org/packages/sandrokeil/blockchain-wallet-api)
