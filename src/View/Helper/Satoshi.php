@@ -73,7 +73,7 @@ class Satoshi extends AbstractHelper
      */
     protected function format($satoshi, $unit)
     {
-        if (null == $unit) {
+        if (null === $unit) {
             $unit = $this->defaultUnit;
         }
 
