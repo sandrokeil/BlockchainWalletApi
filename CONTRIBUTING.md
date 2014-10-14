@@ -2,7 +2,7 @@
 
 ## RESOURCES
 
-If you wish to contribute to Zend Framework, please be sure to read to the following resources:
+If you wish to contribute to Blockchain Wallet Api, please be sure to read to the following resources:
 
  -  Coding Standards: [PSR-0/1/2/4](https://github.com/php-fig/fig-standards/tree/master/accepted)
  -  Git Guide: [README-GIT.md](README-GIT.md)
@@ -15,8 +15,7 @@ page, https://github.com/sandrokeil/BlockchainWalletApi/wiki/RFCs.
 
 To run tests:
 
-- Make sure you have a recent version of PHPUnit installed; 3.7.0
-  minimally.
+- Make sure you have a recent version of PHPUnit installed; 3.7.x minimally.
 - Be sure you are in the root directory
 - Execute PHPUnit
 
