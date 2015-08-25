@@ -1,49 +1,80 @@
 {
-    "name": "sandrokeil/blockchain-wallet-api",
-    "description": "Zend Framework 2 (ZF2) client library for blockchain wallet api. Configure request, call the service and access the response data via objects.",
-    "homepage": "https://github.com/sandrokeil/BlockchainWalletApi",
-    "license": "BSD-3-Clause",
-    "type": "library",
-    "keywords": [
-        "blockchain",
-        "bitcoin",
-        "zf2",
-        "blockchain wallet api",
-        "wallet",
-        "api",
-        "webservice",
-        "client",
-        "payment"
-    ],
-    "authors": [
-        {"name": "Sandro Keil", "homepage": "https://github.com/sandrokeil"}
-    ],
-    "autoload": {
-        "psr-4": {
-            "Sake\\BlockchainWalletApi\\": "src/",
-            "SakeTest\\BlockchainWalletApi\\": "test/"
-        }
-    },
-    "require": {
-        "php": "~5.3",
-        "zendframework/zend-servicemanager": "~2.2",
-        "zendframework/zend-stdlib": "~2.2",
-        "zendframework/zend-http": "~2.2",
-        "zendframework/zend-filter": "~2.2",
-        "sandrokeil/easy-config": "~1.0"
-    },
-    "require-dev": {
-        "zendframework/zend-test": "~2.2",
-        "zendframework/zend-config": "~2.2",
-        "zendframework/zend-form": "~2.2",
-        "zendframework/zend-serializer": "~2.2",
-        "zendframework/zend-log": "~2.2",
-        "zendframework/zend-modulemanager": "~2.2",
-        "zendframework/zend-view": "~2.2",
-        "sandrokeil/citools": "~1.0"
-    },
-    "suggest": {
-        "zendframework/zend-view": "Zend\\View to use satoshi view helper",
-        "zendframework/zend-modulemanager": "Zend\\ModuleManager to use default module configuration e.g. services"
+  "name": "sandrokeil/blockchain-wallet-api",
+  "description": "Zend Framework 2 (ZF2) client library for blockchain wallet api. Configure request, call the service and access the response data via objects.",
+  "homepage": "https://github.com/sandrokeil/BlockchainWalletApi",
+  "license": "BSD-3-Clause",
+  "type": "library",
+  "keywords": [
+    "blockchain",
+    "bitcoin",
+    "zf2",
+    "blockchain wallet api",
+    "wallet",
+    "api",
+    "webservice",
+    "client",
+    "payment"
+  ],
+  "authors": [
+    {
+      "name": "Sandro Keil",
+      "homepage": "https://sandro-keil.de"
     }
+  ],
+  "support": {
+    "issues": "https://github.com/sandrokeil/BlockchainWalletApi/issues",
+    "source": "https://github.com/sandrokeil/BlockchainWalletApi",
+    "docs": "https://github.com/sandrokeil/BlockchainWalletApi"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.zendframework.com/"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Sake\\BlockchainWalletApi\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SakeTest\\BlockchainWalletApi\\": "test/"
+    }
+  },
+  "require": {
+    "php": "~5.5",
+    "sandrokeil/easy-config": "~1.0",
+    "zendframework/zend-http": "~2.4",
+    "zendframework/zend-inputfilter": "~2.5",
+    "zendframework/zend-servicemanager": "~2.6",
+    "zendframework/zend-stdlib": "~2.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.8",
+    "sandrokeil/citools": "~2.0",
+    "sebastian/peek-and-poke": "1.0.x-dev",
+    "zendframework/zend-view": "~2.4"
+  },
+  "suggest": {
+    "zendframework/zend-view": "Zend\\View to use satoshi view helper",
+    "zendframework/zend-modulemanager": "Zend\\ModuleManager to use default module configuration e.g. services"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "extra": {
+    "branch-alias": {
+      "dev-master": "2.0-dev",
+      "dev-develop": "2.1-dev"
+    }
+  },
+  "archive": {
+    "exclude": [
+      "test",
+      "phpunit.xml*",
+      ".travis.yml",
+      ".scrutinizer.yml",
+      ".coveralls.yml"
+    ]
+  }
 }

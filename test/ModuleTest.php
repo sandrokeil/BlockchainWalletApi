@@ -3,7 +3,7 @@
  * Sake
  *
  * @link      http://github.com/sandrokeil/BlockchainWalletApi for the canonical source repository
- * @copyright Copyright (c) 2014 Sandro Keil
+ * @copyright Copyright (c) 2014 - 2015 Sandro Keil
  * @license   http://github.com/sandrokeil/BlockchainWalletApi/blob/master/LICENSE.txt New BSD License
  */
 
@@ -19,34 +19,18 @@ use \Sake\BlockchainWalletApi\Module;
 class ModuleTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Tests getServiceConfig() should should return service manager configuration
+     * Tests getConfig() should should return module configuration
      *
-     * @covers \Sake\BlockchainWalletApi\Module::getServiceConfig
+     * @covers \Sake\BlockchainWalletApi\Module::getConfig
      */
-    public function testGetServiceConfig()
+    public function testGetConfig()
     {
         $cut = new Module();
-        $config = $cut->getServiceConfig();
+        $config = $cut->getConfig();
         $this->assertSame(
-            @include 'config/service_manager.config.php',
+            @include 'config/module.config.php',
             $config,
-            'Service manager configuration could not be read'
-        );
-    }
-
-    /**
-     * Tests getViewHelperConfig() should should return view helper configuration
-     *
-     * @covers \Sake\BlockchainWalletApi\Module::getViewHelperConfig
-     */
-    public function testGetViewHelperConfig()
-    {
-        $cut = new Module();
-        $config = $cut->getViewHelperConfig();
-        $this->assertSame(
-            @include 'config/view_helper.config.php',
-            $config,
-            'View helper configuration could not be read'
+            'Module configuration could not be read'
         );
     }
 }

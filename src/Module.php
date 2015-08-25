@@ -3,39 +3,24 @@
  * Sake
  *
  * @link      http://github.com/sandrokeil/BlockchainWalletApi for the canonical source repository
- * @copyright Copyright (c) 2014 Sandro Keil
+ * @copyright Copyright (c) 2014 - 2015 Sandro Keil
  * @license   http://github.com/sandrokeil/BlockchainWalletApi/blob/master/LICENSE.txt New BSD License
  */
 
 namespace Sake\BlockchainWalletApi;
 
-use Zend\ModuleManager\Feature\ServiceProviderInterface;
-use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
-
 /**
  * This class initializes the BlockchainWalletApi module.
  */
-class Module implements ServiceProviderInterface, ViewHelperProviderInterface
+class Module
 {
     /**
-     * Return service config
-     *
-     * @see ServiceProviderInterface::getServiceConfig()
-     * @return array
-     */
-    public function getServiceConfig()
-    {
-        return require dirname(__DIR__) . '/config/service_manager.config.php';
-    }
-
-    /**
-     * Expected to return \Zend\ServiceManager\Config object or array to
-     * seed such an object.
+     * Return module config e.g. service manager, view helper
      *
      * @return array
      */
-    public function getViewHelperConfig()
+    public function getConfig()
     {
-        return require dirname(__DIR__) . '/config/view_helper.config.php';
+        return require dirname(__DIR__) . '/config/module.config.php';
     }
 }

@@ -3,7 +3,7 @@
  * Sake
  *
  * @link      http://github.com/sandrokeil/BlockchainWalletApi for the canonical source repository
- * @copyright Copyright (c) 2014 Sandro Keil
+ * @copyright Copyright (c) 2014 - 2015 Sandro Keil
  * @license   http://github.com/sandrokeil/BlockchainWalletApi/blob/master/LICENSE.txt New BSD License
  */
 
@@ -34,7 +34,8 @@ class BlockchainWalletFactoryTest extends TestCase
             ->method('getClient')
             ->will($this->returnValue(new Http\Client(null, array('adapter' => new Http\Client\Adapter\Test()))));
 
-        $config = $this->serviceManager->get('Config');
+        $config = $this->serviceManager->get('Configuration');
+
         $config = $config['sake_bwa']['connection']['default']['options'];
 
         /* @var $service \Sake\BlockchainWalletApi\Service\BlockchainWallet */

@@ -8,7 +8,6 @@
  */
 
 return array(
-    'invokables' => array(
-       'satoshi' => '\Sake\BlockchainWalletApi\View\Helper\Satoshi',
-    ),
+    'service_manager' => require __DIR__ . '/service_manager.config.php',
+    'view_helper' => require __DIR__ . '/view_helper.config.php',
 );
