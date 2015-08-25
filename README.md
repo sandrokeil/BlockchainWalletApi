@@ -12,7 +12,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sandrokeil/BlockchainWalletApi/badges/quality-score.png?s=e0089b63bdd99801480a5c7aedbda372767990ab)](https://scrutinizer-ci.com/g/sandrokeil/BlockchainWalletApi/)
 [![Coverage Status](https://coveralls.io/repos/sandrokeil/BlockchainWalletApi/badge.png)](https://coveralls.io/r/sandrokeil/BlockchainWalletApi)
 [![HHVM Status](http://hhvm.h4cc.de/badge/sandrokeil/blockchain-wallet-api.svg)](http://hhvm.h4cc.de/package/sandrokeil/blockchain-wallet-api)
-[![PHP 7 ready](http://php7ready.timesplinter.ch/sandrokeil/blockchain-wallet-api/badge.svg)](https://travis-ci.org/sandrokeil/BlockchainWalletApi)
+[![PHP 7 ready](http://php7ready.timesplinter.ch/sandrokeil/BlockchainWalletApi/badge.svg)](https://travis-ci.org/sandrokeil/BlockchainWalletApi)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/eb0ea220-d358-431e-8862-1e85c84ad06a/mini.png)](https://insight.sensiolabs.com/projects/eb0ea220-d358-431e-8862-1e85c84ad06a)
 [![Latest Stable Version](https://poser.pugx.org/sandrokeil/blockchain-wallet-api/v/stable.png)](https://packagist.org/packages/sandrokeil/blockchain-wallet-api)
 [![Dependency Status](https://www.versioneye.com/user/projects/53615c9cfe0d07b45c000082/badge.svg)](https://www.versioneye.com/user/projects/53615c9cfe0d07b45c000082)
@@ -36,7 +36,7 @@ Put the following into your composer.json
 
     {
         "require": {
-            "sandrokeil/blockchain-wallet-api": "~1.0"
+            "sandrokeil/blockchain-wallet-api": "~2.0"
         }
     }
 
